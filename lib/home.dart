@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:nh_client/home_page.dart';
 import 'package:nh_client/mine_page.dart';
@@ -27,11 +28,8 @@ class HomeState extends State<Home> {
       init: c,
       builder: (controller) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text('主页'),
-            backgroundColor: Colors.white,
-          ),
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.transparent,
             items: bnItems,
             currentIndex: controller.homeIndex,
             type: BottomNavigationBarType.fixed,
