@@ -1,5 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:nh_client/controller.dart';
@@ -44,50 +43,53 @@ class _HomePageState extends State<HomePage> {
     ),
   );
 
-  String sayName(String name) {
-    return "hi, $name";
-  }
-
   Widget itemCard(String name, double percent) {
-    double percentH = percent * 100;
-    return SizedBox(
-        height: 150,
-        width: 250,
-        child: Row(
-          children: [
-            SizedBox(
-              width: 200,
-              child: Text(name),
-            ),
-            const SizedBox(
-              width: 2,
-              height: 250,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.black),
+    String percentH = (percent * 100).toStringAsFixed(2);
+    return Neumorphic(
+      margin: const EdgeInsets.all(10),
+      child: SizedBox(
+          height: 150,
+          width: 250,
+          child: Row(
+            children: [
+              SizedBox(
+                width: 100,
+                child: Text(name),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 75,
-                  ),
-                  SizedBox(
-                    height: 10,
-                    child: LinearProgressIndicator(
-                      backgroundColor: Colors.grey[200],
-                      valueColor: const AlwaysStoppedAnimation(Colors.blue),
-                      value: percent,
+              const SizedBox(
+                width: 2,
+                height: 100,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: Colors.black),
+                ),
+              ),
+              const SizedBox(
+                width: 50,
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 75,
                     ),
-                  ),
-                  Text("您有 $name 的概率是 $percentH%")
-                ],
+                    SizedBox(
+                        height: 10,
+                        child: NeumorphicProgress(
+                          height: 20,
+                          percent: percent,
+                        )),
+                    Text("您有 $name 的概率是 $percentH%")
+                  ],
+                ),
               ),
-            ),
-            const Icon(Icons.chevron_right)
-          ],
-        ));
+              const SizedBox(
+                width: 50,
+              ),
+              const Icon(Icons.chevron_right)
+            ],
+          )),
+    );
   }
 
   Widget dividers() {
@@ -106,11 +108,11 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
             body: ListView(
           children: [
-            dividers(),
-            itemCard("test1", 0.5),
-            dividers(),
-            itemCard("test2", 0.8),
-            dividers()
+            itemCard("test1", 0.114514),
+            itemCard("test2", 0.1919810),
+            itemCard("test3", 0.233),
+            itemCard("test4", 0.666),
+            itemCard("test5", 0.666),
           ],
         ));
       },
