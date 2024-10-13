@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   Widget itemCard(String name, double percent) {
     String percentH = (percent * 100).toStringAsFixed(2);
     return Neumorphic(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(20),
       child: SizedBox(
           height: 150,
           width: 250,
@@ -54,13 +54,23 @@ class _HomePageState extends State<HomePage> {
             children: [
               SizedBox(
                 width: 100,
-                child: Text(name),
+                child: NeumorphicText(
+                  name,
+                  style: const NeumorphicStyle(
+                    depth: 10,
+                    color: Colors.black,
+                  ),
+                  textStyle: NeumorphicTextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               const SizedBox(
                 width: 2,
                 height: 100,
                 child: DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.black),
+                  decoration: BoxDecoration(color: Color.fromARGB(114, 0, 0, 0)),
                 ),
               ),
               const SizedBox(
@@ -78,7 +88,11 @@ class _HomePageState extends State<HomePage> {
                         child: NeumorphicProgress(
                           height: 20,
                           percent: percent,
-                        )),
+                          style: const ProgressStyle(
+                            depth: 2,
+                          ),
+                        )
+                      ),
                     Text("您有 $name 的概率是 $percentH%")
                   ],
                 ),
@@ -86,7 +100,14 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 width: 50,
               ),
-              const Icon(Icons.chevron_right)
+              NeumorphicIcon(
+                Icons.chevron_right,
+                size: 30,
+                style: const NeumorphicStyle(
+                  depth: 10,
+                  color: Colors.black,
+                ),
+              )
             ],
           )),
     );
@@ -108,10 +129,10 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
             body: ListView(
           children: [
-            itemCard("test1", 0.114514),
-            itemCard("test2", 0.1919810),
-            itemCard("test3", 0.233),
-            itemCard("test4", 0.666),
+            itemCard("唤醒度", 0.114514),
+            itemCard("愉悦度", 0.1919810),
+            itemCard("支配度", 0.233),
+            itemCard("抑郁度", 0.666),
             itemCard("test5", 0.666),
           ],
         ));
