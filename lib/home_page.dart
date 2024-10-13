@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
+import 'package:nh_client/content.dart';
 import 'package:nh_client/controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,7 +46,17 @@ class _HomePageState extends State<HomePage> {
 
   Widget itemCard(String name, double percent) {
     String percentH = (percent * 100).toStringAsFixed(2);
-    return Neumorphic(
+    return NeumorphicButton(
+      onPressed: () {
+        Get.to(() => Content());
+      },
+      style: const NeumorphicStyle(
+        color: Colors.white,
+        depth: 10,
+        shape: NeumorphicShape.convex,
+        lightSource: LightSource.topRight,
+        intensity: 3,
+      ),
       margin: const EdgeInsets.all(20),
       child: SizedBox(
           height: 150,
@@ -127,8 +138,9 @@ class _HomePageState extends State<HomePage> {
       init: Get.put(Controller()),
       builder: (controller) {
         return Scaffold(
-            body: ListView(
-          children: [
+          backgroundColor: Colors.white,
+          body: ListView(
+           children: [
             itemCard("唤醒度", 0.114514),
             itemCard("愉悦度", 0.1919810),
             itemCard("支配度", 0.233),

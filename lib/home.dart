@@ -29,7 +29,7 @@ class HomeState extends State<Home> {
       builder: (controller) {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Color.fromARGB(255, 255, 255, 255),
             items: bnItems,
             currentIndex: controller.homeIndex,
             type: BottomNavigationBarType.fixed,
