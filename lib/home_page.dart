@@ -16,14 +16,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final c = Get.put(Controller());
-  Future<Null> getHttp() async {
+  Future getHttp() async {
     try {
-      dio.Response response = await dio.Dio().get("http://www.baidu.com");
-      c.changeData(response.data[0]);
+      dio.Response response = await dio.Dio().get("http://192.168.43.234:8000");
+      c.changeMap(response.data);
     } catch (e) {
       print(e);
     }
-    return null;
+    return;
   }
 
   final chartData = LineChartData(
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                             depth: 2,
                           ),
                         )),
-                    Text("您有 $name 的概率是 $percentH%")
+                    Text(" $name :$percentH%")
                   ],
                 ),
               ),
@@ -151,16 +151,10 @@ class _HomePageState extends State<HomePage> {
                       onPressed: getHttp,
                       child: const Text("刷新"),
                     ),
-                    itemCard("唤醒度", 0.114514),
-                    itemCard("愉悦度", 0.1919810),
-                    itemCard("支配度", 0.233),
-                    itemCard("抑郁度", 0.666),
-                    itemCard("test5", 0.666),
-                    SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Text(controller.Data),
-                    )
+                    itemCard("dp", controller.map['dp']),
+                    itemCard("valence", controller.map['valence']),
+                    itemCard("arousal", controller.map['arousal']),
+                    itemCard("dominance", controller.map['dominance']),
                   ],
                 )));
       },
