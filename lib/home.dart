@@ -10,15 +10,11 @@ class HomeState extends State<Home> {
   final Controller c = Get.put(Controller());
   final List<BottomNavigationBarItem> bnItems = [
     const BottomNavigationBarItem(
-      backgroundColor: Colors.blue,
-      icon: Icon(Icons.home),
-      label: "首页"
-      ),
-      const BottomNavigationBarItem(
+        backgroundColor: Colors.blue, icon: Icon(Icons.home), label: "首页"),
+    const BottomNavigationBarItem(
         backgroundColor: Color.fromARGB(255, 244, 228, 54),
         icon: Icon(Icons.person),
-        label: "我的"
-      )
+        label: "我的")
   ];
   final pages = [HomePage(), MinePage()];
 
@@ -40,7 +36,6 @@ class HomeState extends State<Home> {
       },
     );
   }
-  
 }
 
 class Home extends StatefulWidget {
@@ -48,5 +43,4 @@ class Home extends StatefulWidget {
   State<StatefulWidget> createState() {
     return HomeState();
   }
-  
 }

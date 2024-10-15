@@ -3,6 +3,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:nh_client/content.dart';
 import 'package:nh_client/controller.dart';
+import 'package:dio/dio.dart' as dio;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +15,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final c = Get.put(Controller());
+  Future<Null> getHttp() async {
+    try {
+      dio.Response response = await dio.Dio().get("http://www.baidu.com");
+      c.changeData(response.data[0]);
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
+
   final chartData = LineChartData(
     lineBarsData: [
       LineChartBarData(
@@ -81,7 +93,8 @@ class _HomePageState extends State<HomePage> {
                 width: 2,
                 height: 100,
                 child: DecoratedBox(
-                  decoration: BoxDecoration(color: Color.fromARGB(114, 0, 0, 0)),
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(114, 0, 0, 0)),
                 ),
               ),
               const SizedBox(
@@ -102,8 +115,7 @@ class _HomePageState extends State<HomePage> {
                           style: const ProgressStyle(
                             depth: 2,
                           ),
-                        )
-                      ),
+                        )),
                     Text("您有 $name 的概率是 $percentH%")
                   ],
                 ),
@@ -124,30 +136,33 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget dividers() {
-    return const Divider(
-      height: 0,
-      thickness: 2,
-      color: Colors.black,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: Get.put(Controller()),
+      init: c,
       builder: (controller) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          body: ListView(
-           children: [
-            itemCard("唤醒度", 0.114514),
-            itemCard("愉悦度", 0.1919810),
-            itemCard("支配度", 0.233),
-            itemCard("抑郁度", 0.666),
-            itemCard("test5", 0.666),
-          ],
-        ));
+        return RefreshIndicator(
+            onRefresh: getHttp,
+            child: Scaffold(
+                backgroundColor: Colors.white,
+                body: ListView(
+                  children: [
+                    ElevatedButton(
+                      onPressed: getHttp,
+                      child: const Text("刷新"),
+                    ),
+                    itemCard("唤醒度", 0.114514),
+                    itemCard("愉悦度", 0.1919810),
+                    itemCard("支配度", 0.233),
+                    itemCard("抑郁度", 0.666),
+                    itemCard("test5", 0.666),
+                    SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Text(controller.Data),
+                    )
+                  ],
+                )));
       },
     );
   }
