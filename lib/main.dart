@@ -1,9 +1,12 @@
+import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:nh_client/home.dart';
 
 void main() {
+  OpenAI.apiKey = "sk-68BjgN9UrzofPiunPduYMLLgUec6mpMppGOvfAtSJPVd5YMe";
+  OpenAI.baseUrl = "https://api.moonshot.cn";
   runApp(const MyApp());
 }
 

@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
+import 'package:nh_client/ai.dart';
 import 'package:nh_client/content.dart';
 import 'package:nh_client/controller.dart';
 import 'package:dio/dio.dart' as dio;
@@ -144,6 +145,20 @@ class _HomePageState extends State<HomePage> {
         return RefreshIndicator(
             onRefresh: getHttp,
             child: Scaffold(
+                floatingActionButton: NeumorphicFloatingActionButton(
+                  onPressed: () {
+                    controller.changeDiagnosis("您的AI心理医生正在为您生成专属报告，请稍等...");
+                    Get.to(() => AI());
+                  },
+                  style: const NeumorphicStyle(
+                    color: Colors.white,
+                    depth: 5,
+                    shape: NeumorphicShape.convex,
+                    lightSource: LightSource.topRight,
+                    intensity: 2,
+                  ),
+                  child: const Icon(Icons.help_outline),
+                ),
                 backgroundColor: Colors.white,
                 body: ListView(
                   children: [
