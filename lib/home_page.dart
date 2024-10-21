@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   final c = Get.put(Controller());
   Future getHttp() async {
     try {
-      dio.Response response = await dio.Dio().get("http://192.168.43.234:8000");
+      dio.Response response = await dio.Dio().get("http://192.168.43.234");
       c.changeMap(response.data);
     } catch (e) {
       print(e);
@@ -162,14 +162,14 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: Colors.white,
                 body: ListView(
                   children: [
-                    ElevatedButton(
-                      onPressed: getHttp,
-                      child: const Text("刷新"),
-                    ),
-                    itemCard("dp", controller.map['dp']),
-                    itemCard("valence", controller.map['valence']),
-                    itemCard("arousal", controller.map['arousal']),
-                    itemCard("dominance", controller.map['dominance']),
+                    // ElevatedButton(
+                    //   onPressed: getHttp,
+                    //   child: const Text("刷新"),
+                    // ),
+                    itemCard("抑郁度", controller.map['dp']),
+                    itemCard("愉悦度", controller.map['valence']),
+                    itemCard("唤醒度", controller.map['arousal']),
+                    itemCard("支配度", controller.map['dominance']),
                   ],
                 )));
       },
