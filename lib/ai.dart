@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dart_openai/dart_openai.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:fetch_client/fetch_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -44,7 +46,7 @@ class _AIState extends State<AI>{
       """你作为一个心理医生，根据DEAP数据集的情感分类中三个情感轮的概率，
       以及抑郁症的概率，告诉患者的精神状况，以及合理专业的建议。
       {"dp": 0.0, "valence": 0.0, "arousal": 0.0, "dominance": 0.0}每次对话你将会得到这样一个数据格式
-      其中dp是抑郁症的概率，valence是愉悦度的概率，arousal是兴奋度的概率，dominance是支配度的概率,抑郁症概率在50%以下是正常的""",
+      其中dp是抑郁症的概率，valence是愉悦度的概率，arousal是兴奋度的概率，dominance是支配度的概率,抑郁症概率在50%以下可以判定为不患抑郁症""",
       c.map.toString());
   }
 
@@ -52,12 +54,13 @@ class _AIState extends State<AI>{
     var dataChunks = "";
     try {
       Dio dio = Dio();
-      dio.httpClientAdapter = ConversionLayerAdapter(FetchClient(mode: RequestMode.cors));
+      dio.httpClientAdapter = DefaultHttpClientAdapter();
 
   // 设置请求头
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer sk-68BjgN9UrzofPiunPduYMLLgUec6mpMppGOvfAtSJPVd5YMe',
+      HttpHeaders.userAgentHeader: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     };
 
   // 设置请求参数
